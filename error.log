@@ -1,0 +1,188 @@
+Error fetching location
+Error fetching location
+Error fetching location
+Error fetching location
+Unkown exception thrown when making API request to Geocoding API:0
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 52, in geo_data
+    lat = location_json[0].get('lat')
+          ~~~~~~~~~~~~~^^^
+KeyError: 0
+Unkown exception thrown when making API request to Geocoding API:0
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 52, in geo_data
+    lat = location_json[0].get('lat')
+          ~~~~~~~~~~~~~^^^
+KeyError: 0
+Error fetching location
+Unkown exception thrown when making API request to Geocoding API:0
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
+    lat = location_json[0].get('lat')
+          ~~~~~~~~~~~~~^^^
+KeyError: 0
+Unkown exception thrown when making API request to Geocoding API:0
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
+    lat = location_json[0].get('lat')
+          ~~~~~~~~~~~~~^^^
+KeyError: 0
+Unkown exception thrown when making API request to Geocoding API:0
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
+    lat = location_json[0].get('lat')
+          ~~~~~~~~~~~~~^^^
+KeyError: 0
+Unkown exception thrown when making API request to Geocoding API:0
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
+    lat = location_json[0].get('lat')
+          ~~~~~~~~~~~~~^^^
+KeyError: 0
+Unkown exception thrown when making API request to Geocoding API:0
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
+    lat = location_json[0].get('lat')
+          ~~~~~~~~~~~~~^^^
+KeyError: 0
+Error fetching location
+Unkown exception thrown when making API request to Geocoding API:list index out of range
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
+    lat = location_json[0].get('lat')
+          ~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Unkown exception thrown when making API request to Geocoding API:list index out of range
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
+    lat = location_json[0].get('lat')
+          ~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Unkown exception: can't adapt type 'dict'
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 98, in get_weather_for_user
+    database_connection.save_data(data)
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
+    self.cursor.execute(insert_query, (data,))
+psycopg2.ProgrammingError: can't adapt type 'dict'
+Error saving data to database: can't adapt type 'dict'
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 99, in get_weather_for_user
+    database_connection.save_data(data)
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
+    self.cursor.execute(insert_query, (data,))
+psycopg2.ProgrammingError: can't adapt type 'dict'
+Unkown exception: can't adapt type 'dict'
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 98, in get_weather_for_user
+    db.save_data(data)
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
+    self.cursor.execute(insert_query, (data,))
+psycopg2.ProgrammingError: can't adapt type 'dict'
+Unkown exception: can't adapt type 'dict'
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 98, in get_weather_for_user
+    db.save_data(obj)
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
+    self.cursor.execute(insert_query, (data,))
+psycopg2.ProgrammingError: can't adapt type 'dict'
+Unkown exception: can't adapt type 'dict'
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 98, in get_weather_for_user
+    db.save_data(obj)
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
+    self.cursor.execute(insert_query, (data,))
+psycopg2.ProgrammingError: can't adapt type 'dict'
+KeyError: 'forcast'
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 98, in get_weather_for_user
+    db.save_data({
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
+    self.cursor.execute(insert_query, (data['clouds'], data['forcast'], data['wind_speed'], data['location'], data['temp']))
+                                                       ~~~~^^^^^^^^^^^
+KeyError: 'forcast'
+Unkown exception: relation "weather" does not exist
+LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
+                    ^
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 98, in get_weather_for_user
+    db.save_data({
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
+    self.cursor.execute(insert_query, (data['clouds'], data['forcast'], data['wind_speed'], data['location'], data['temp']))
+psycopg2.errors.UndefinedTable: relation "weather" does not exist
+LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
+                    ^
+
+Unkown exception: syntax error at or near "location_name"
+LINE 4:                 location_name VARCHAR(255),
+                        ^
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 94, in get_weather_for_user
+    db.create_table()
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 38, in create_table
+    self.cursor.execute(table_creation)
+psycopg2.errors.SyntaxError: syntax error at or near "location_name"
+LINE 4:                 location_name VARCHAR(255),
+                        ^
+
+Unkown exception: syntax error at or near "location_name"
+LINE 4:                 location_name TEXT NOT NULL,
+                        ^
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 94, in get_weather_for_user
+    db.create_table()
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 38, in create_table
+    self.cursor.execute(table_creation)
+psycopg2.errors.SyntaxError: syntax error at or near "location_name"
+LINE 4:                 location_name TEXT NOT NULL,
+                        ^
+
+Unkown exception: relation "weather" does not exist
+LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
+                    ^
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 99, in get_weather_for_user
+    db.save_data({
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
+    self.cursor.execute(insert_query, (data['clouds'], data['forcast'], data['wind_speed'], data['location'], data['temp']))
+psycopg2.errors.UndefinedTable: relation "weather" does not exist
+LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
+                    ^
+
+Unkown exception: relation "weather" does not exist
+LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
+                    ^
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 99, in get_weather_for_user
+    db.save_data({
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
+    self.cursor.execute(insert_query, (data['clouds'], data['forcast'], data['wind_speed'], data['location'], data['temp']))
+psycopg2.errors.UndefinedTable: relation "weather" does not exist
+LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
+                    ^
+
+Unkown exception: relation "weather" does not exist
+LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
+                    ^
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 99, in get_weather_for_user
+    db.save_data({
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
+    self.cursor.execute(insert_query, (data['clouds'], data['forcast'], data['wind_speed'], data['location'], data['temp']))
+psycopg2.errors.UndefinedTable: relation "weather" does not exist
+LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
+                    ^
+
+Unkown exception: column "location" of relation "weather_data" does not exist
+LINE 1: ... INTO weather_data (clouds, forecast, wind_speed, location, ...
+                                                             ^
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 99, in get_weather_for_user
+    db.save_data({
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
+    self.cursor.execute(insert_query, (data['clouds'], data['forcast'], data['wind_speed'], data['location'], data['temp']))
+psycopg2.errors.UndefinedColumn: column "location" of relation "weather_data" does not exist
+LINE 1: ... INTO weather_data (clouds, forecast, wind_speed, location, ...
+                                                             ^
+
+Error fetching location

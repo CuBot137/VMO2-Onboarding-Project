@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Weather Data{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block content %}
+
+    <h1>Enter your location</h1>
+    <form action="/location" method="post">
+        <input type="text" name="location" placeholder="Town/City Name">
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Weather Information for {{ location }}</h2>
+    <div class="weather-info">
+        <div>Cloudiness:</div> <div>{{ clouds }}%</div>
+        <div>Feels Like:</div> <div>{{ temp }}°C</div>
+        <div>Forecast:</div> <div>{{ forecast }}</div>
+        <div>Wind Speed:</div> <div>{{ wind_speed }} m/s</div>
+        <div>Location:</div> <div>{{ location }}</div>
+    </div>
+{% endblock %}
