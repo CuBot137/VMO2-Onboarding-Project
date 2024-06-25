@@ -1,188 +1,74 @@
-Error fetching location
-Error fetching location
-Error fetching location
-Error fetching location
-Unkown exception thrown when making API request to Geocoding API:0
+Dataset not found: 404 GET https://bigquery.googleapis.com/bigquery/v2/projects/function-project-423615/datasets/VMO2_Dataset?prettyPrint=false: Not found: Dataset function-project-423615:VMO2_Dataset
 Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 52, in geo_data
-    lat = location_json[0].get('lat')
-          ~~~~~~~~~~~~~^^^
-KeyError: 0
-Unkown exception thrown when making API request to Geocoding API:0
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 137, in <module>
+    client.get_dataset(dataset_id)
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\cloud\bigquery\client.py", line 870, in get_dataset
+    api_response = self._call_api(
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\cloud\bigquery\client.py", line 833, in _call_api
+    return call()
+           ^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 153, in retry_target
+    _retry_error_helper(
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\api_core\retry\retry_base.py", line 212, in _retry_error_helper
+    raise final_exc from source_exc
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 144, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\cloud\_http\__init__.py", line 494, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.NotFound: 404 GET https://bigquery.googleapis.com/bigquery/v2/projects/function-project-423615/datasets/VMO2_Dataset?prettyPrint=false: Not found: Dataset function-project-423615:VMO2_Dataset
+Failed to create dataset: 403 POST https://bigquery.googleapis.com/bigquery/v2/projects/function-project-423615/datasets?prettyPrint=false: Access Denied: Project function-project-423615: User does not have bigquery.datasets.create permission in project function-project-423615.
 Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 52, in geo_data
-    lat = location_json[0].get('lat')
-          ~~~~~~~~~~~~~^^^
-KeyError: 0
-Error fetching location
-Unkown exception thrown when making API request to Geocoding API:0
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 143, in <module>
+    client.create_dataset(dataset_id)
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\cloud\bigquery\client.py", line 683, in create_dataset
+    api_response = self._call_api(
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\cloud\bigquery\client.py", line 833, in _call_api
+    return call()
+           ^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 153, in retry_target
+    _retry_error_helper(
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\api_core\retry\retry_base.py", line 212, in _retry_error_helper
+    raise final_exc from source_exc
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 144, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\cloud\_http\__init__.py", line 494, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.Forbidden: 403 POST https://bigquery.googleapis.com/bigquery/v2/projects/function-project-423615/datasets?prettyPrint=false: Access Denied: Project function-project-423615: User does not have bigquery.datasets.create permission in project function-project-423615.
+Failed to create dataset: 403 POST https://bigquery.googleapis.com/bigquery/v2/projects/function-project-423615/datasets?prettyPrint=false: Access Denied: Project function-project-423615: User does not have bigquery.datasets.create permission in project function-project-423615.
 Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
-    lat = location_json[0].get('lat')
-          ~~~~~~~~~~~~~^^^
-KeyError: 0
-Unkown exception thrown when making API request to Geocoding API:0
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 143, in <module>
+    client.create_dataset(dataset_id)
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\cloud\bigquery\client.py", line 683, in create_dataset
+    api_response = self._call_api(
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\cloud\bigquery\client.py", line 833, in _call_api
+    return call()
+           ^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 153, in retry_target
+    _retry_error_helper(
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\api_core\retry\retry_base.py", line 212, in _retry_error_helper
+    raise final_exc from source_exc
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 144, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\google\cloud\_http\__init__.py", line 494, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.Forbidden: 403 POST https://bigquery.googleapis.com/bigquery/v2/projects/function-project-423615/datasets?prettyPrint=false: Access Denied: Project function-project-423615: User does not have bigquery.datasets.create permission in project function-project-423615.
+ValueError: Missing or invalid data: 0
 Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
-    lat = location_json[0].get('lat')
-          ~~~~~~~~~~~~~^^^
-KeyError: 0
-Unkown exception thrown when making API request to Geocoding API:0
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
-    lat = location_json[0].get('lat')
-          ~~~~~~~~~~~~~^^^
-KeyError: 0
-Unkown exception thrown when making API request to Geocoding API:0
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
-    lat = location_json[0].get('lat')
-          ~~~~~~~~~~~~~^^^
-KeyError: 0
-Unkown exception thrown when making API request to Geocoding API:0
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
-    lat = location_json[0].get('lat')
-          ~~~~~~~~~~~~~^^^
-KeyError: 0
-Error fetching location
-Unkown exception thrown when making API request to Geocoding API:list index out of range
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
-    lat = location_json[0].get('lat')
-          ~~~~~~~~~~~~~^^^
-IndexError: list index out of range
-Unkown exception thrown when making API request to Geocoding API:list index out of range
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 51, in geo_data
-    lat = location_json[0].get('lat')
-          ~~~~~~~~~~~~~^^^
-IndexError: list index out of range
-Unkown exception: can't adapt type 'dict'
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 98, in get_weather_for_user
-    database_connection.save_data(data)
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
-    self.cursor.execute(insert_query, (data,))
-psycopg2.ProgrammingError: can't adapt type 'dict'
-Error saving data to database: can't adapt type 'dict'
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 99, in get_weather_for_user
-    database_connection.save_data(data)
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
-    self.cursor.execute(insert_query, (data,))
-psycopg2.ProgrammingError: can't adapt type 'dict'
-Unkown exception: can't adapt type 'dict'
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 98, in get_weather_for_user
-    db.save_data(data)
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
-    self.cursor.execute(insert_query, (data,))
-psycopg2.ProgrammingError: can't adapt type 'dict'
-Unkown exception: can't adapt type 'dict'
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 98, in get_weather_for_user
-    db.save_data(obj)
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
-    self.cursor.execute(insert_query, (data,))
-psycopg2.ProgrammingError: can't adapt type 'dict'
-Unkown exception: can't adapt type 'dict'
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 98, in get_weather_for_user
-    db.save_data(obj)
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
-    self.cursor.execute(insert_query, (data,))
-psycopg2.ProgrammingError: can't adapt type 'dict'
-KeyError: 'forcast'
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 98, in get_weather_for_user
-    db.save_data({
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
-    self.cursor.execute(insert_query, (data['clouds'], data['forcast'], data['wind_speed'], data['location'], data['temp']))
-                                                       ~~~~^^^^^^^^^^^
-KeyError: 'forcast'
-Unkown exception: relation "weather" does not exist
-LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
-                    ^
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 98, in get_weather_for_user
-    db.save_data({
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
-    self.cursor.execute(insert_query, (data['clouds'], data['forcast'], data['wind_speed'], data['location'], data['temp']))
-psycopg2.errors.UndefinedTable: relation "weather" does not exist
-LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
-                    ^
-
-Unkown exception: syntax error at or near "location_name"
-LINE 4:                 location_name VARCHAR(255),
-                        ^
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 94, in get_weather_for_user
-    db.create_table()
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 38, in create_table
-    self.cursor.execute(table_creation)
-psycopg2.errors.SyntaxError: syntax error at or near "location_name"
-LINE 4:                 location_name VARCHAR(255),
-                        ^
-
-Unkown exception: syntax error at or near "location_name"
-LINE 4:                 location_name TEXT NOT NULL,
-                        ^
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 94, in get_weather_for_user
-    db.create_table()
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 38, in create_table
-    self.cursor.execute(table_creation)
-psycopg2.errors.SyntaxError: syntax error at or near "location_name"
-LINE 4:                 location_name TEXT NOT NULL,
-                        ^
-
-Unkown exception: relation "weather" does not exist
-LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
-                    ^
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 99, in get_weather_for_user
-    db.save_data({
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
-    self.cursor.execute(insert_query, (data['clouds'], data['forcast'], data['wind_speed'], data['location'], data['temp']))
-psycopg2.errors.UndefinedTable: relation "weather" does not exist
-LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
-                    ^
-
-Unkown exception: relation "weather" does not exist
-LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
-                    ^
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 99, in get_weather_for_user
-    db.save_data({
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
-    self.cursor.execute(insert_query, (data['clouds'], data['forcast'], data['wind_speed'], data['location'], data['temp']))
-psycopg2.errors.UndefinedTable: relation "weather" does not exist
-LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
-                    ^
-
-Unkown exception: relation "weather" does not exist
-LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
-                    ^
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 99, in get_weather_for_user
-    db.save_data({
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
-    self.cursor.execute(insert_query, (data['clouds'], data['forcast'], data['wind_speed'], data['location'], data['temp']))
-psycopg2.errors.UndefinedTable: relation "weather" does not exist
-LINE 1: INSERT INTO weather (clouds, forecast, wind_speed, location,...
-                    ^
-
-Unkown exception: column "location" of relation "weather_data" does not exist
-LINE 1: ... INTO weather_data (clouds, forecast, wind_speed, location, ...
-                                                             ^
-Traceback (most recent call last):
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 99, in get_weather_for_user
-    db.save_data({
-  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\db.py", line 44, in save_data
-    self.cursor.execute(insert_query, (data['clouds'], data['forcast'], data['wind_speed'], data['location'], data['temp']))
-psycopg2.errors.UndefinedColumn: column "location" of relation "weather_data" does not exist
-LINE 1: ... INTO weather_data (clouds, forecast, wind_speed, location, ...
-                                                             ^
-
-Error fetching location
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 175, in get_weather_for_user
+    raise ValueError(f'Missing or invalid data: {obj}')
+ValueError: Missing or invalid data: 0
