@@ -9,7 +9,6 @@ from google.cloud import bigquery, storage
 from google.cloud.exceptions import NotFound
 from flatten_json import flatten
 import pandas as pd
-import json
 
 # Service account with correct permissions
 GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
