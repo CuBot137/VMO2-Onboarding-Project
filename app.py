@@ -4,7 +4,6 @@ import os
 from dotenv import load_dotenv
 from logging.handlers import RotatingFileHandler
 import logging
-from db import Database
 from google.cloud import bigquery, storage
 from google.cloud.exceptions import NotFound
 from flatten_json import flatten
@@ -25,13 +24,6 @@ bucket_name = 'vmo2_bucket'
 source_file_name = 'output.csv'
 destination_blob_name = 'output.csv'
 source_uri = f'gs://{bucket_name}/{destination_blob_name}'
-# project_id = 'festive-idea-426808-e6'
-# dataset_id = f'{project_id}.VMO2_Dataset'
-# table_id = f'{dataset_id}.weather_table'
-# bucket_name = 'vmo2_bucket'
-# source_file_name = 'output.csv'
-# destination_blob_name = 'output.csv'
-# source_uri = f'gs://{bucket_name}/{destination_blob_name}'
 
 # Set up logging
 if not app.debug:

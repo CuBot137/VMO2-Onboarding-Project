@@ -1,0 +1,8 @@
+Flask==3.0.3
+flatten_json==0.1.14
+pandas==2.2.2
+protobuf==5.27.2
+python-dotenv==1.0.1
+Requests==2.32.3
+google-cloud-bigquery
+google-cloud-storage

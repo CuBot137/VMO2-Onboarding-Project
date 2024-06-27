@@ -1,2 +1,2 @@
 ,coord_lon,coord_lat,weather_0_id,weather_0_main,weather_0_description,weather_0_icon,base,main_temp,main_feels_like,main_temp_min,main_temp_max,main_pressure,main_humidity,main_sea_level,main_grnd_level,visibility,wind_speed,wind_deg,wind_gust,clouds_all,dt,sys_type,sys_id,sys_country,sys_sunrise,sys_sunset,timezone,id,name,cod
-0,-71.0598,42.3584,802,Clouds,scattered clouds,03d,stations,295.64,295.98,293.94,297.25,1006,78,1006,1002,10000,6.17,270,8.75,40,1719498223,2,2013408,US,1719479369,1719534307,-14400,4930956,Boston,200
+0,-74.006,40.7127,801,Clouds,few clouds,02d,stations,298.21,298.36,296.74,299.73,1008,61,1008,1007,10000,6.17,290,9.26,20,1719500812,1,4610,US,1719480416,1719534674,-14400,5128581,New York,200

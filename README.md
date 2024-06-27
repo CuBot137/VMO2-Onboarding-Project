@@ -1,36 +1,62 @@
-# VMO2-Onboarding-Project
-This project is a simple web application that fetches weather data for a user and stores it in a database.
+# VM02 Onboarding Project
+This project is a Flask-based web application that interacts with the OpenWeatherMap API to fetch weather data for a specified location, uploads the data to Google Cloud Storage (GCS), and loads it into a BigQuery table for further analysis. The application is containerized using Docker.
 
-## Files
-### app.py
-This is the main file that runs the web application. It uses Flask to create routes and render templates. The main route is /get_weather_for_user, which fetches weather data for a user, stores it in a database, and displays it on a webpage.
+## Features
+Fetch weather data using the OpenWeatherMap API.
+Upload the weather data to a Google Cloud Storage bucket.
+Load the weather data into a BigQuery table.
+Simple web interface to enter location and view weather data.
+## Prerequisites
+Python 3.11
+Docker
+Google Cloud SDK with BigQuery and Storage APIs enabled
+OpenWeatherMap API key
+## Setup
+Clone the repository:
+
+git clone https://github.com/yourusername/vm02-onboarding-project.git
+cd vm02-onboarding-project
+Create and activate a virtual environment:
 
 
-The get_weather_for_user function does the following:
+python -m venv venv
+source venv/bin/activate   # On Windows use `venv\Scripts\activate`
+Install the dependencies:
 
-Fetches weather data from a session variable.
-Extracts relevant information from the weather data.
-Creates a database connection.
-Creates a table in the database if it doesn't exist.
-Saves the weather data to the database.
-Renders a webpage with the weather data.
-### db.py
-This file contains the Database class, which is used to interact with the database. It has two main methods: create_table and save_data.
+pip install -r requirements.txt
+Set up environment variables:
 
-The create_table method creates a table in the database if it doesn't already exist.
+Create a .env file in the project root directory with the following content:
+makefile
+Copy code
+API_KEY=your_openweathermap_api_key
+SECRET_KEY=your_flask_secret_key
+GOOGLE_APPLICATION_CREDENTIALS=/root/service-account-key.json
+Download your Google Cloud service account key:
 
-The save_data method saves a given data object to the database.
+Save the service account key JSON file to a known location, e.g., C:\Users\ConorLynam\Downloads\festive-idea-426808-e6-66b6816fda7c.json.
+## Running the Application
+python app.py
+Access the application:
+Open your web browser and go to http://localhost:5000.
 
-## How to Run
-To run this project, you need to have Python and Flask installed. You can then run the app.py file with Python.
-
-This will start the web server, and you can access the application at http://localhost:5000.
-
-## Dependencies
-This project uses the following Python libraries:
-
-Flask
-Make sure to install these dependencies using pip:
-
-Future Improvements
-Future improvements could include adding more routes, improving error handling, and adding more features to the web interface.
+## Project Structure
+app.py: Main application code.
+requirements.txt: List of Python dependencies.
+Dockerfile: Docker configuration file.
+.env: Environment variables file.
+## Key Functions
+check_if_bucket_exists(): Checks if the GCS bucket exists, and creates it if not.
+create_bucket(): Creates a new GCS bucket.
+upload_to_gcs(): Uploads a file to GCS.
+load_csv_from_storage_to_bigquery(): Loads a CSV file from GCS to BigQuery.
+create_csv_file(): Converts weather data from JSON to CSV.
+check_if_dataset_exists(): Checks if the BigQuery dataset exists, and creates it if not.
+create_dataset(): Creates a new BigQuery dataset.
+## Routes
+/: Main page to enter the location.
+/error: Error page to display custom error messages.
+/location: Processes the user-input location.
+/geo_data/<location_name>: Fetches the latitude and longitude of the specified location.
+/get_weather: Fetches weather data for the specified location and processes it.
+/get_weather_for_user: Displays the weather data to the user.
