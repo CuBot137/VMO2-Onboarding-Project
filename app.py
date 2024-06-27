@@ -19,12 +19,19 @@ load_dotenv()
 api_key = os.getenv('API_KEY')
 app.secret_key = os.getenv('SECRET_KEY')
 project_id = 'festive-idea-426808-e6'
-dataset_id = f'{project_id}.VMO2_Dataset'
-table_id = f'{dataset_id}.weather_table'
+dataset_id = 'VMO2_Dataset'
+table_id = 'weather_table'
 bucket_name = 'vmo2_bucket'
 source_file_name = 'output.csv'
 destination_blob_name = 'output.csv'
 source_uri = f'gs://{bucket_name}/{destination_blob_name}'
+# project_id = 'festive-idea-426808-e6'
+# dataset_id = f'{project_id}.VMO2_Dataset'
+# table_id = f'{dataset_id}.weather_table'
+# bucket_name = 'vmo2_bucket'
+# source_file_name = 'output.csv'
+# destination_blob_name = 'output.csv'
+# source_uri = f'gs://{bucket_name}/{destination_blob_name}'
 
 # Set up logging
 if not app.debug:
@@ -222,7 +229,7 @@ def get_weather_response():
         print('upload_to_gcs has been ran')
         load_csv_from_storage_to_bigquery(dataset_id, table_id, source_uri)
         print('load_csv_from_storage_to_bigquery has been ran')
-
+        return redirect(url_for('get_weather_for_user'))
     except requests.RequestException as e:
         app.logger.exception(f'Exception thrown when making API requset to Weather API: {e}')
         return redirect(url_for('error', message=f'Exception thrown when making API requset to Weather API: {e}'))
@@ -230,53 +237,53 @@ def get_weather_response():
         app.logger.exception(f'Unkown exception thrown when making API requset to Weather API:{e}')
         return redirect(url_for('error', message=f'Unknwon exception thrown when making API requset to Weather API: {e}'))
 
-# @app.route('/get_weather_for_user')
-# def get_weather_for_user():
-#     try:
-#         weather_data = session.get('weather_data')
-#         clouds = weather_data.get('clouds', {}).get('all', 'N/A')
-#         forecast = weather_data.get('weather', {})[0].get('description', 'N/A')
-#         wind_speed = weather_data.get('wind').get('speed', 'N/A')
-#         location = weather_data.get('name', 'N/A')
-#         temp = weather_data.get('main', {}).get('feels_like', 'N/A')
-#         temp = (temp - 273.15)
-#         temp = f'{temp:.2f}'
+@app.route('/get_weather_for_user')
+def get_weather_for_user():
+    try:
+        weather_data = session.get('weather_data')
+        clouds = weather_data.get('clouds', {}).get('all', 'N/A')
+        forecast = weather_data.get('weather', {})[0].get('description', 'N/A')
+        wind_speed = weather_data.get('wind').get('speed', 'N/A')
+        location = weather_data.get('name', 'N/A')
+        temp = weather_data.get('main', {}).get('feels_like', 'N/A')
+        temp = (temp - 273.15)
+        temp = f'{temp:.2f}'
 
-#         data = [weather_data, clouds, forecast, wind_speed, location, temp]
+        # data = [weather_data, clouds, forecast, wind_speed, location, temp]
 
-#         # Creates a database connection. The use of with will shut close the connection incase of an error
-#         # with Database() as db_connection:
-#         #     try:
-#         #         db_connection.create_table()
-#         #         print("TABLE CREATED")
-#         #         # for obj in data:
-#         #         if not data or data == 'N/A':
-#         #             raise ValueError(f'Missing or invalid data: {data}')
-#         #         data_obj = {
-#         #             'clouds': clouds,
-#         #             'forecast': forecast,
-#         #             'wind_speed': wind_speed,
-#         #             'location_name': location,
-#         #             'temp': temp
-#         #         }
-#         #         db_connection.save_data(data_obj)
-#         #     except ValueError as e:
-#         #         app.logger.exception(f'ValueError: {e}')
-#         #         return redirect(url_for('error', message=f'ValueError: {e}'))
+        # Creates a database connection. The use of with will shut close the connection incase of an error
+        # with Database() as db_connection:
+        #     try:
+        #         db_connection.create_table()
+        #         print("TABLE CREATED")
+        #         # for obj in data:
+        #         if not data or data == 'N/A':
+        #             raise ValueError(f'Missing or invalid data: {data}')
+        #         data_obj = {
+        #             'clouds': clouds,
+        #             'forecast': forecast,
+        #             'wind_speed': wind_speed,
+        #             'location_name': location,
+        #             'temp': temp
+        #         }
+        #         db_connection.save_data(data_obj)
+        #     except ValueError as e:
+        #         app.logger.exception(f'ValueError: {e}')
+        #         return redirect(url_for('error', message=f'ValueError: {e}'))
                 
-#         return render_template('weather.html', clouds=clouds, temp=temp, forecast=forecast, wind_speed=wind_speed, location=location)
-#     except KeyError as e:
-#         app.logger.exception(f'KeyError: {e}')
-#         return redirect(url_for('error', message=f'KeyError: {e}'))
-#     except TypeError as e:
-#         app.logger.exception(f'TypeError: {e}')
-#         return redirect(url_for('error', message=f'TypeError: {e}'))
-#     except ValueError as e:
-#         app.logger.exception(f'ValueError: {e}')
-#         return redirect(url_for('error', message=f'ValueError: {e}'))
-#     except Exception as e:
-#         app.logger.exception(f'Unkown exception: {e}')
-#         return redirect(url_for('error', message=f'Unkown exception: {e}'))
+        return render_template('weather.html', clouds=clouds, temp=temp, forecast=forecast, wind_speed=wind_speed, location=location)
+    except KeyError as e:
+        app.logger.exception(f'KeyError: {e}')
+        return redirect(url_for('error', message=f'KeyError: {e}'))
+    except TypeError as e:
+        app.logger.exception(f'TypeError: {e}')
+        return redirect(url_for('error', message=f'TypeError: {e}'))
+    except ValueError as e:
+        app.logger.exception(f'ValueError: {e}')
+        return redirect(url_for('error', message=f'ValueError: {e}'))
+    except Exception as e:
+        app.logger.exception(f'Unkown exception: {e}')
+        return redirect(url_for('error', message=f'Unkown exception: {e}'))
 
 
 if __name__ == "__main__":
