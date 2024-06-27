@@ -124,16 +124,6 @@ def create_dataset():
     except Exception as e:
         print(f'Error creating dataset: {e}')
     
-# def check_if_table_exists():
-#     try:
-#         table = client.get_table(table_id)
-#         if table:
-#             print(f'Table {table_id} exists')
-#     except NotFound as e:
-#         print(f'Table {table_id} does not exist')
-#         print(f'Creating table {table_id}...')
-#         create_table()
-
 
 # Loads the main page
 @app.route('/', methods=['GET'])
