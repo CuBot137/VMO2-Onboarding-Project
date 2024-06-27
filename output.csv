@@ -1,0 +1,2 @@
+,coord_lon,coord_lat,weather_0_id,weather_0_main,weather_0_description,weather_0_icon,base,main_temp,main_feels_like,main_temp_min,main_temp_max,main_pressure,main_humidity,visibility,wind_speed,wind_deg,clouds_all,dt,sys_type,sys_id,sys_country,sys_sunrise,sys_sunset,timezone,id,name,cod
+0,-74.006,40.7127,801,Clouds,few clouds,02d,stations,293.36,293.68,291.65,294.35,1006,86,10000,5.14,290,20,1719482786,1,4610,US,1719480416,1719534674,-14400,5128581,New York,200

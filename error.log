@@ -72,3 +72,47 @@ Traceback (most recent call last):
   File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 175, in get_weather_for_user
     raise ValueError(f'Missing or invalid data: {obj}')
 ValueError: Missing or invalid data: 0
+Unkown exception thrown when making API requset to Weather API:If using all scalar values, you must pass an index
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 170, in get_weather_response
+    create_csv_file(weather_data)
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 56, in create_csv_file
+    df = pd.DataFrame(flat_json)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\pandas\core\frame.py", line 778, in __init__
+    mgr = dict_to_mgr(data, index, columns, dtype=dtype, copy=copy, typ=manager)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\pandas\core\internals\construction.py", line 503, in dict_to_mgr
+    return arrays_to_mgr(arrays, columns, index, dtype=dtype, typ=typ, consolidate=copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\pandas\core\internals\construction.py", line 114, in arrays_to_mgr
+    index = _extract_index(arrays)
+            ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\pandas\core\internals\construction.py", line 667, in _extract_index
+    raise ValueError("If using all scalar values, you must pass an index")
+ValueError: If using all scalar values, you must pass an index
+Error creating csv file: If using all scalar values, you must pass an index
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 171, in get_weather_response
+    create_csv_file(weather_data)
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 56, in create_csv_file
+    df = pd.DataFrame(flat_json)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\pandas\core\frame.py", line 778, in __init__
+    mgr = dict_to_mgr(data, index, columns, dtype=dtype, copy=copy, typ=manager)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\pandas\core\internals\construction.py", line 503, in dict_to_mgr
+    return arrays_to_mgr(arrays, columns, index, dtype=dtype, typ=typ, consolidate=copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\pandas\core\internals\construction.py", line 114, in arrays_to_mgr
+    index = _extract_index(arrays)
+            ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\venv\Lib\site-packages\pandas\core\internals\construction.py", line 667, in _extract_index
+    raise ValueError("If using all scalar values, you must pass an index")
+ValueError: If using all scalar values, you must pass an index
+Error fetching location
+Error sending data to BigQuery: send_data_to_bigquery() missing 1 required positional argument: 'data'
+Traceback (most recent call last):
+  File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 201, in get_weather_response
+    send_data_to_bigquery(data)
+TypeError: send_data_to_bigquery() missing 1 required positional argument: 'data'

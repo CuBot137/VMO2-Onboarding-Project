@@ -5,8 +5,11 @@ from dotenv import load_dotenv
 from logging.handlers import RotatingFileHandler
 import logging
 from db import Database
-from google.cloud import bigquery
+from google.cloud import bigquery, storage
 from google.cloud.exceptions import NotFound
+from flatten_json import flatten
+import pandas as pd
+import json
 
 GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 # Start flask application
@@ -18,6 +21,7 @@ app.secret_key = os.getenv('SECRET_KEY')
 project_id = 'festive-idea-426808-e6'
 dataset_id = f'{project_id}.VMO2_Dataset'
 table_id = f'{dataset_id}.weather_table'
+bucket_name = 'vmo2_bucket'
 
 # Set up logging
 if not app.debug:
@@ -26,6 +30,34 @@ if not app.debug:
     app.logger.addHandler(handler)
 
 client = bigquery.Client()
+storage_client = storage.Client()
+
+def check_if_bucket_exists():
+    try:
+        bucket = storage_client.get_bucket(bucket_name)
+        if bucket:
+            print(f'Bucket {bucket_name} exists')
+    except NotFound as e:
+        print(f'Bucket {bucket_name} does not exist')
+        print(f'Creating bucket {bucket_name}...')
+        create_bucket()
+
+def create_bucket():
+    try:
+        bucket = storage_client.create_bucket(bucket_name)
+        print(f'Bucket {bucket.name} created')
+    except Exception as e:
+        print(f'Error creating bucket: {e}')
+
+# Convert weather_data which is json into a csv file
+def create_csv_file(weather_data):
+    # Flatten weather data
+    flat_json = flatten(weather_data)
+    # Pandas DataFrame
+    df = pd.DataFrame(flat_json, index=[0])
+    csv_file = 'output.csv'
+    df.to_csv(csv_file, index=True)
+    
 
 def check_if_dataset_exists():
     try:
@@ -60,8 +92,33 @@ def check_if_table_exists():
 def create_table():
     try:
         schema = [
-            bigquery.SchemaField("id", "INTEGER", mode="REQUIRED", policy_tags=["AUTOMATIC"]),
-            bigquery.SchemaField("data", "STRING", mode="REQUIRED")
+            bigquery.SchemaField("coord_lon", "FLOAT", mode="REQUIRED"),
+            bigquery.SchemaField("coord_lat", "FLOAT", mode="REQUIRED"),
+            bigquery.SchemaField("weather_0_id", "INTEGER", mode="REQUIRED"),
+            bigquery.SchemaField("weather_0_main", "STRING", mode="REQUIRED"),
+            bigquery.SchemaField("weather_0_description", "STRING", mode="REQUIRED"),
+            bigquery.SchemaField("weather_0_icon", "STRING", mode="REQUIRED"),
+            bigquery.SchemaField("base", "STRING", mode="REQUIRED"),
+            bigquery.SchemaField("main_temp", "FLOAT", mode="REQUIRED"),
+            bigquery.SchemaField("main_feels_like", "FLOAT", mode="REQUIRED"),
+            bigquery.SchemaField("main_temp_min", "FLOAT", mode="REQUIRED"),
+            bigquery.SchemaField("main_temp_max", "FLOAT", mode="REQUIRED"),
+            bigquery.SchemaField("main_pressure", "INTEGER", mode="REQUIRED"),
+            bigquery.SchemaField("main_humidity", "INTEGER", mode="REQUIRED"),
+            bigquery.SchemaField("visibility", "INTEGER", mode="REQUIRED"),
+            bigquery.SchemaField("wind_speed", "FLOAT", mode="REQUIRED"),
+            bigquery.SchemaField("wind_deg", "INTEGER", mode="REQUIRED"),
+            bigquery.SchemaField("clouds_all", "INTEGER", mode="REQUIRED"),
+            bigquery.SchemaField("dt", "INTEGER", mode="REQUIRED"),
+            bigquery.SchemaField("sys_type", "INTEGER", mode="REQUIRED"),
+            bigquery.SchemaField("sys_id", "INTEGER", mode="REQUIRED"),
+            bigquery.SchemaField("sys_country", "STRING", mode="REQUIRED"),
+            bigquery.SchemaField("sys_sunrise", "INTEGER", mode="REQUIRED"),
+            bigquery.SchemaField("sys_sunset", "INTEGER", mode="REQUIRED"),
+            bigquery.SchemaField("timezone", "INTEGER", mode="REQUIRED"),
+            bigquery.SchemaField("id", "INTEGER", mode="REQUIRED"),
+            bigquery.SchemaField("name", "STRING", mode="REQUIRED"),
+            bigquery.SchemaField("cod", "INTEGER", mode="REQUIRED"),
         ]
         table = bigquery.Table(table_id, schema=schema)
         table = client.create_table(table)
@@ -71,23 +128,18 @@ def create_table():
 
 def send_data_to_bigquery(data):
     try:
-        rows = []
-        for row in data:
-            rows.append(f"({row['clouds']}, '{row['forecast']}', {row['wind_speed']}, '{row['location_name']}', {row['temp']})")
-
-        query = f"""
-        INSERT INTO `{table_id}` (clouds, forecast, wind_speed, location_name, temp)
-        VALUES {', '.join(rows)}
-        """
-        query_job = client.query(query)
-        query_job.result()
-        print('new rows have been added!')
+        print('SENF_DATA_TO_BIQUERY')
+        # Parse the JSON data
+        # parsed_data = json.loads(data)
+        for i in data:
+            print(i)
     except Exception as e:
         print(f'Error sending data to BigQuery: {e}')
 
 # Loads the main page
 @app.route('/', methods=['GET'])
 def index():
+    check_if_bucket_exists()
     check_if_dataset_exists()
     check_if_table_exists()
     return render_template('index.html')
@@ -139,10 +191,14 @@ def get_weather_response():
         url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}'
         data = requests.get(url)
         weather_data = data.json()
-
+        try:
+            create_csv_file(weather_data)
+        except Exception as e:
+            app.logger.exception(f'Error creating csv file: {e}')
+            return redirect(url_for('error', message=f'Error creating csv file: {e}'))
         # Send entire json response to BigQuery
         try:
-            send_data_to_bigquery(weather_data)
+            send_data_to_bigquery(data)
         except Exception as e:
             app.logger.exception(f'Error sending data to BigQuery: {e}')
             return redirect(url_for('error', message=f'Error sending data to BigQuery: {e}'))
