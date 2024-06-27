@@ -11,6 +11,7 @@ from flatten_json import flatten
 import pandas as pd
 import json
 
+# Service account with correct permissions
 GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 # Start flask application
 app = Flask(__name__)
@@ -39,9 +40,11 @@ if not app.debug:
     handler.setLevel(logging.ERROR)
     app.logger.addHandler(handler)
 
+# BigQuery and Storage Clients 
 client = bigquery.Client()
 storage_client = storage.Client()
 
+# Check if bucket exists. If not, call create_bucket
 def check_if_bucket_exists():
     try:
         bucket = storage_client.get_bucket(bucket_name)
@@ -52,6 +55,7 @@ def check_if_bucket_exists():
         print(f'Creating bucket {bucket_name}...')
         create_bucket()
 
+# Create bucket
 def create_bucket():
     try:
         bucket = storage_client.create_bucket(bucket_name)
@@ -59,6 +63,7 @@ def create_bucket():
     except Exception as e:
         print(f'Error creating bucket: {e}')
 
+#                 Bucket name. Path to csv file. Name of the file to be uploaded
 def upload_to_gcs(bucket_name, source_file_name, destination_blob_name):
     try:
         bucket = storage_client.bucket(bucket_name)
@@ -129,43 +134,6 @@ def create_dataset():
 #         print(f'Creating table {table_id}...')
 #         create_table()
 
-# def create_table():
-#     try:
-#         schema = [
-#             bigquery.SchemaField("coord_lon", "FLOAT", mode="REQUIRED"),
-#             bigquery.SchemaField("coord_lat", "FLOAT", mode="REQUIRED"),
-#             bigquery.SchemaField("weather_0_id", "INTEGER", mode="REQUIRED"),
-#             bigquery.SchemaField("weather_0_main", "STRING", mode="REQUIRED"),
-#             bigquery.SchemaField("weather_0_description", "STRING", mode="REQUIRED"),
-#             bigquery.SchemaField("weather_0_icon", "STRING", mode="REQUIRED"),
-#             bigquery.SchemaField("base", "STRING", mode="REQUIRED"),
-#             bigquery.SchemaField("main_temp", "FLOAT", mode="REQUIRED"),
-#             bigquery.SchemaField("main_feels_like", "FLOAT", mode="REQUIRED"),
-#             bigquery.SchemaField("main_temp_min", "FLOAT", mode="REQUIRED"),
-#             bigquery.SchemaField("main_temp_max", "FLOAT", mode="REQUIRED"),
-#             bigquery.SchemaField("main_pressure", "INTEGER", mode="REQUIRED"),
-#             bigquery.SchemaField("main_humidity", "INTEGER", mode="REQUIRED"),
-#             bigquery.SchemaField("visibility", "INTEGER", mode="REQUIRED"),
-#             bigquery.SchemaField("wind_speed", "FLOAT", mode="REQUIRED"),
-#             bigquery.SchemaField("wind_deg", "INTEGER", mode="REQUIRED"),
-#             bigquery.SchemaField("clouds_all", "INTEGER", mode="REQUIRED"),
-#             bigquery.SchemaField("dt", "INTEGER", mode="REQUIRED"),
-#             bigquery.SchemaField("sys_type", "INTEGER", mode="REQUIRED"),
-#             bigquery.SchemaField("sys_id", "INTEGER", mode="REQUIRED"),
-#             bigquery.SchemaField("sys_country", "STRING", mode="REQUIRED"),
-#             bigquery.SchemaField("sys_sunrise", "INTEGER", mode="REQUIRED"),
-#             bigquery.SchemaField("sys_sunset", "INTEGER", mode="REQUIRED"),
-#             bigquery.SchemaField("timezone", "INTEGER", mode="REQUIRED"),
-#             bigquery.SchemaField("id", "INTEGER", mode="REQUIRED"),
-#             bigquery.SchemaField("name", "STRING", mode="REQUIRED"),
-#             bigquery.SchemaField("cod", "INTEGER", mode="REQUIRED"),
-#         ]
-#         table = bigquery.Table(table_id, schema=schema)
-#         table = client.create_table(table)
-#         print(f'Table {table.table_id} created')
-#     except Exception as e:
-#         print(f'Error creating table: {e}')
-
 
 # Loads the main page
 @app.route('/', methods=['GET'])
@@ -217,6 +185,7 @@ def geo_data(location_name):
 @app.route('/get_weather')
 def get_weather_response():
     try:
+        # Make API call to Weather API
         lat = request.args.get('lat')
         lon = request.args.get('lon')
         url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}'
@@ -229,6 +198,9 @@ def get_weather_response():
         print('upload_to_gcs has been ran')
         load_csv_from_storage_to_bigquery(dataset_id, table_id, source_uri)
         print('load_csv_from_storage_to_bigquery has been ran')
+
+        # Track data across multiple requests
+        session['weather_data'] = weather_data
         return redirect(url_for('get_weather_for_user'))
     except requests.RequestException as e:
         app.logger.exception(f'Exception thrown when making API requset to Weather API: {e}')
@@ -240,37 +212,16 @@ def get_weather_response():
 @app.route('/get_weather_for_user')
 def get_weather_for_user():
     try:
+        # Retrieve data from session
         weather_data = session.get('weather_data')
+        print(weather_data)
         clouds = weather_data.get('clouds', {}).get('all', 'N/A')
         forecast = weather_data.get('weather', {})[0].get('description', 'N/A')
         wind_speed = weather_data.get('wind').get('speed', 'N/A')
         location = weather_data.get('name', 'N/A')
         temp = weather_data.get('main', {}).get('feels_like', 'N/A')
         temp = (temp - 273.15)
-        temp = f'{temp:.2f}'
-
-        # data = [weather_data, clouds, forecast, wind_speed, location, temp]
-
-        # Creates a database connection. The use of with will shut close the connection incase of an error
-        # with Database() as db_connection:
-        #     try:
-        #         db_connection.create_table()
-        #         print("TABLE CREATED")
-        #         # for obj in data:
-        #         if not data or data == 'N/A':
-        #             raise ValueError(f'Missing or invalid data: {data}')
-        #         data_obj = {
-        #             'clouds': clouds,
-        #             'forecast': forecast,
-        #             'wind_speed': wind_speed,
-        #             'location_name': location,
-        #             'temp': temp
-        #         }
-        #         db_connection.save_data(data_obj)
-        #     except ValueError as e:
-        #         app.logger.exception(f'ValueError: {e}')
-        #         return redirect(url_for('error', message=f'ValueError: {e}'))
-                
+        temp = f'{temp:.2f}'         
         return render_template('weather.html', clouds=clouds, temp=temp, forecast=forecast, wind_speed=wind_speed, location=location)
     except KeyError as e:
         app.logger.exception(f'KeyError: {e}')

@@ -116,3 +116,4 @@ Traceback (most recent call last):
   File "C:\Users\ConorLynam\Coding\VMO2 Onboarding Project\app.py", line 201, in get_weather_response
     send_data_to_bigquery(data)
 TypeError: send_data_to_bigquery() missing 1 required positional argument: 'data'
+Error fetching location
