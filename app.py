@@ -123,17 +123,6 @@ def create_dataset():
         print(f'Dataset {dataset.dataset_id} created')
     except Exception as e:
         print(f'Error creating dataset: {e}')
-    
-# def check_if_table_exists():
-#     try:
-#         table = client.get_table(table_id)
-#         if table:
-#             print(f'Table {table_id} exists')
-#     except NotFound as e:
-#         print(f'Table {table_id} does not exist')
-#         print(f'Creating table {table_id}...')
-#         create_table()
-
 
 # Loads the main page
 @app.route('/', methods=['GET'])
@@ -214,7 +203,6 @@ def get_weather_for_user():
     try:
         # Retrieve data from session
         weather_data = session.get('weather_data')
-        print(weather_data)
         clouds = weather_data.get('clouds', {}).get('all', 'N/A')
         forecast = weather_data.get('weather', {})[0].get('description', 'N/A')
         wind_speed = weather_data.get('wind').get('speed', 'N/A')
