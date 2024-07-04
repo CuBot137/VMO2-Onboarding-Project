@@ -10,7 +10,7 @@ from flatten_json import flatten
 import pandas as pd
 
 # Service account with correct permissions
-GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+# GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 # Start flask application
 app = Flask(__name__)
 # Load env variables
@@ -217,4 +217,4 @@ def get_weather_for_user():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=8080)
