@@ -56,3 +56,4 @@ Save the service account key JSON file to a known location, e.g., C:\Users\Conor
 - /geo_data/<location_name>: Fetches the latitude and longitude of the specified location.
 - /get_weather: Fetches weather data for the specified location and processes it.
 - /get_weather_for_user: Displays the weather data to the user.
+- /retrieve_data: Retrieves all data from BigQuery

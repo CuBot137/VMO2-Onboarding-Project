@@ -1,4 +1,5 @@
-from flask import Flask,request, render_template, redirect, url_for, session
+from flask import Flask,request, render_template, redirect, url_for, session, jsonify
+from flask_restful import Api, Resource
 import requests
 import os
 from dotenv import load_dotenv
@@ -9,10 +10,12 @@ from google.cloud.exceptions import NotFound
 from flatten_json import flatten
 import pandas as pd
 
+
 # Service account with correct permissions
 GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 # Start flask application
 app = Flask(__name__)
+api = Api(app)
 # Load env variables
 load_dotenv()
 api_key = os.getenv('API_KEY')
@@ -215,6 +218,26 @@ def get_weather_for_user():
         app.logger.exception(f'Unkown exception: {e}')
         return redirect(url_for('error', message=f'Unkown exception: {e}'))
 
+
+class RetrieveData(Resource):
+    def get(self):
+        data = self.get_data_from_bigquery()
+        return jsonify(data)
+
+    # Function that retrieves data from bigquery and returns it as json
+    @staticmethod
+    def get_data_from_bigquery():
+        query = f'SELECT * FROM {project_id}.{dataset_id}.{table_id}'
+        query_job = client.query(query)
+        rows = query_job.result()
+
+        data = []
+        for row in rows:
+            data.append(dict(row))
+        return data
+
+
+api.add_resource(RetrieveData, '/retrieve_data')
 
 if __name__ == "__main__":
     app.run(debug=True)
